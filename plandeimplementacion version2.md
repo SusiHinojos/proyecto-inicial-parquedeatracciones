@@ -241,7 +241,7 @@ Ejemplo:
 
 HyperLoop → 4.7G
 🚀 6. GIGA PLAN DE IMPLEMENTACIÓN
-✅ FASE 1 — CORE & DATA
+## ✅ FASE 1 — CORE & DATA
 Objetivo
 
 Construir la base arquitectónica estable.
@@ -263,7 +263,7 @@ Resultado
 ✔ Dominio independiente
 ✔ Base lista para lógica
 
-✅ FASE 2 — BUSINESS LOGIC
+## ✅ FASE 2 — BUSINESS LOGIC
 Use Cases principales
 LoginEmployee
 valida credenciales locales
@@ -285,7 +285,7 @@ Resultado:
 ✔ Sistema funcional completo
 ✔ Reglas centralizadas
 
-✅ FASE 3 — UI ADAPTATIVA
+## ✅ FASE 3 — UI ADAPTATIVA
 Objetivo
 
 Una sola app → múltiples dispositivos.
@@ -312,7 +312,7 @@ Resultado:
 
 ✔ Experiencia multiplataforma real
 
-✅ FASE 4 — HARDWARE & DESKTOP
+## ✅ FASE 4 — HARDWARE & DESKTOP
 Windows Features
 
 ✔ Atajos de teclado:
