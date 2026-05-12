@@ -1,1676 +1,594 @@
+🚀 ANTIGRAVITY
+Plataforma Multiplataforma de Gestión de Parque de Atracciones
 
+Flutter 3.x — Clean Architecture — Multiplatform
 
-# 🚀 ANTIGRAVITY — MASTER SOFTWARE ARCHITECTURE
-
-**Tipo:** Plataforma multiplataforma
-**Tecnología:** Flutter 3.x
-**Arquitectura:** Clean Architecture + Modular Feature Architecture
-**Targets:**
-✅ Android
-✅ iOS
-✅ Web
-✅ Windows Desktop
-
----
-
-# 1️⃣ ESTRUCTURA PROFESIONAL DEL PROYECTO
-
-Principio rector:
-
-👉 **Feature First + Clean Architecture híbrida**
-
-Esto evita el caos típico en proyectos Flutter grandes.
-
----
-
-## 🌐 Estructura Global
-
-```
+📁 1. ESTRUCTURA PROFESIONAL DEL PROYECTO
 antigravity/
 │
-├── android/
-├── ios/
-├── web/
-├── windows/
-├── linux/
-├── macos/
+├── pubspec.yaml
+├── analysis_options.yaml
+├── README.md
 │
 ├── assets/
 │   ├── images/
 │   ├── icons/
 │   └── fonts/
 │
-├── test/
+├── lib/
+│   ├── main.dart
+│   │
+│   └── src/
 │
-├── pubspec.yaml
-├── analysis_options.yaml
+│       ├── core/
+│       │   ├── constants/
+│       │   │   ├── colors.dart
+│       │   │   ├── strings.dart
+│       │   │   └── sizes.dart
+│       │   │
+│       │   ├── errors/
+│       │   │   ├── failures.dart
+│       │   │   └── exceptions.dart
+│       │   │
+│       │   ├── usecases/
+│       │   │   └── usecase.dart
+│       │   │
+│       │   ├── utils/
+│       │   │   ├── validators.dart
+│       │   │   └── platform_helper.dart
+│       │   │
+│       │   └── theme/
+│       │       ├── antigravity_theme.dart
+│       │       └── purple_palette.dart
+│       │
+│       ├── domain/
+│       │   ├── entities/
+│       │   │   ├── employee.dart
+│       │   │   ├── attraction.dart
+│       │   │   ├── ticket.dart
+│       │   │   └── sale.dart
+│       │   │
+│       │   ├── repositories/
+│       │   │   ├── auth_repository.dart
+│       │   │   ├── attraction_repository.dart
+│       │   │   ├── ticket_repository.dart
+│       │   │   └── sales_repository.dart
+│       │   │
+│       │   └── usecases/
+│       │       ├── login_employee.dart
+│       │       ├── buy_ticket.dart
+│       │       ├── validate_access.dart
+│       │       └── generate_ticket.dart
+│       │
+│       ├── data/
+│       │   ├── models/
+│       │   │   ├── employee_model.dart
+│       │   │   ├── attraction_model.dart
+│       │   │   ├── ticket_model.dart
+│       │   │   └── sale_model.dart
+│       │   │
+│       │   ├── datasources/
+│       │   │   ├── local/
+│       │   │   │   ├── sqflite_db.dart
+│       │   │   │   └── hive_db.dart
+│       │   │
+│       │   ├── repositories/
+│       │   │   ├── auth_repository_impl.dart
+│       │   │   ├── attraction_repository_impl.dart
+│       │   │   ├── ticket_repository_impl.dart
+│       │   │   └── sales_repository_impl.dart
+│       │   │
+│       │   └── mappers/
+│       │       └── entity_mapper.dart
+│       │
+│       └── presentation/
+│           ├── app/
+│           │   ├── router.dart
+│           │   └── app.dart
+│           │
+│           ├── shared/
+│           │   ├── widgets/
+│           │   └── layouts/
+│           │
+│           ├── pages/
+│           │   ├── login/
+│           │   ├── dashboard/
+│           │   ├── attractions/
+│           │   ├── ticket_sales/
+│           │   └── settings/
+│           │
+│           └── state/
+│               ├── providers/
+│               └── controllers/
 │
-└── lib/
-    └── src/
-```
+└── test/
+📦 2. DEPENDENCIAS OFICIALES — pubspec.yaml
 
----
+✔ SIN ANALÍTICAS
+✔ SIN CONFIGURACIÓN PRODUCCIÓN
+✔ MULTIPLATAFORMA REAL
 
-## 🧠 Núcleo Clean Architecture
+name: antigravity
+description: Plataforma multiplataforma de gestión de parque de atracciones
 
-```
-lib/src/
-│
-├── core/
-│   ├── config/
-│   │   ├── app_config.dart
-│   │   ├── env.dart
-│   │   └── platform_config.dart
-│   │
-│   ├── constants/
-│   │   ├── app_constants.dart
-│   │   ├── routes.dart
-│   │   └── db_constants.dart
-│   │
-│   ├── error/
-│   │   ├── failures.dart
-│   │   ├── exceptions.dart
-│   │   └── result.dart
-│   │
-│   ├── utils/
-│   │   ├── responsive.dart
-│   │   ├── validators.dart
-│   │   ├── formatters.dart
-│   │   └── extensions.dart
-│   │
-│   ├── database/
-│   │   ├── database_factory.dart
-│   │   ├── sqflite_service.dart
-│   │   └── hive_service.dart
-│   │
-│   └── dependency_injection/
-│       └── injector.dart
-│
-├── domain/
-│   ├── entities/
-│   │   ├── employee.dart
-│   │   ├── attraction.dart
-│   │   ├── ticket.dart
-│   │   ├── transaction.dart
-│   │   └── access_rule.dart
-│   │
-│   ├── repositories/
-│   │   ├── employee_repository.dart
-│   │   ├── ticket_repository.dart
-│   │   ├── attraction_repository.dart
-│   │   └── transaction_repository.dart
-│   │
-│   ├── usecases/
-│   │   ├── auth/
-│   │   │   └── login_employee.dart
-│   │   │
-│   │   ├── ticket/
-│   │   │   ├── buy_ticket.dart
-│   │   │   ├── validate_access.dart
-│   │   │   └── generate_ticket.dart
-│   │   │
-│   │   └── attraction/
-│   │       └── get_attractions.dart
-│   │
-│   └── value_objects/
-│       ├── ticket_type.dart
-│       ├── attraction_type.dart
-│       └── gforce.dart
-│
-├── data/
-│   ├── models/
-│   │   ├── employee_model.dart
-│   │   ├── ticket_model.dart
-│   │   ├── attraction_model.dart
-│   │   └── transaction_model.dart
-│   │
-│   ├── datasources/
-│   │   ├── local/
-│   │   │   ├── employee_local_ds.dart
-│   │   │   ├── ticket_local_ds.dart
-│   │   │   ├── attraction_local_ds.dart
-│   │   │   └── transaction_local_ds.dart
-│   │
-│   ├── mappers/
-│   │   ├── employee_mapper.dart
-│   │   ├── ticket_mapper.dart
-│   │   └── attraction_mapper.dart
-│   │
-│   └── repositories/
-│       ├── employee_repository_impl.dart
-│       ├── ticket_repository_impl.dart
-│       ├── attraction_repository_impl.dart
-│       └── transaction_repository_impl.dart
-│
-└── presentation/
-    ├── app/
-    │   ├── antigravity_app.dart
-    │   └── router.dart
-    │
-    ├── shared/
-    │   ├── widgets/
-    │   ├── themes/
-    │   └── layouts/
-    │
-    ├── features/
-    │   ├── auth/
-    │   │   ├── login_page.dart
-    │   │   └── auth_controller.dart
-    │   │
-    │   ├── dashboard/
-    │   │   └── dashboard_page.dart
-    │   │
-    │   ├── attractions/
-    │   │   ├── attractions_page.dart
-    │   │   └── attractions_controller.dart
-    │   │
-    │   ├── tickets/
-    │   │   ├── ticket_sale_page.dart
-    │   │   ├── ticket_result_page.dart
-    │   │   └── ticket_controller.dart
-    │   │
-    │   └── employees/
-    │       └── employee_page.dart
-    │
-    └── state/
-        ├── base_controller.dart
-        └── app_state.dart
-```
+environment:
+  sdk: ">=3.3.0 <4.0.0"
 
----
-
-# 2️⃣ GIGA-PLAN DE IMPLEMENTACIÓN
-
----
-
-# 🧱 FASE 1 — CORE & DATA
-
-Objetivo: **Sistema estable antes de UI**
-
----
-
-## 1.1 Entidades Inmutables (Domain)
-
-Regla:
-
-```
-Entities = PURE BUSINESS
-NO Flutter
-NO Database
-NO JSON
-```
-
-Ejemplo conceptual:
-
-* Employee
-* Ticket
-* Attraction
-* Transaction
-
-Todos:
-
-✅ `const constructors`
-✅ `copyWith()`
-✅ `Equatable`
-
----
-
-## 1.2 Value Objects
-
-Evita errores humanos.
-
-```
-TicketType
-AttractionType
-GForce
-```
-
-Ejemplo:
-
-```
-GForce(value: 4.5)
-```
-
-Nunca usar `double` directo.
-
----
-
-## 1.3 Persistencia Híbrida
-
-### Mobile + Desktop
-
-✅ sqflite
-
-### Web
-
-✅ Hive
-
----
-
-## Database Factory Pattern
-
-```
-if(web)
-   Hive
-else
-   Sqflite
-```
-
-La app **no sabe qué DB usa**.
-
----
-
-## 1.4 DTO / Model Layer
-
-Separación obligatoria:
-
-| Tipo   | Uso          |
-| ------ | ------------ |
-| Entity | Dominio      |
-| Model  | Persistencia |
-| Mapper | Conversión   |
-
----
-
-# 🧠 FASE 2 — BUSINESS LOGIC
-
-Esta fase convierte el proyecto en **software profesional**.
-
----
-
-## Use Case 1 — Login Employee
-
-```
-LoginEmployeeUseCase
-```
-
-Flujo:
-
-1. validar credenciales
-2. buscar empleado local
-3. verificar rol
-4. devolver sesión
-
----
-
-## Use Case 2 — Buy Ticket ⭐ CRÍTICO
-
-Reglas:
-
-| Ticket   | Acceso  |
-| -------- | ------- |
-| Básico   | Básicas |
-| Familiar | Básicas |
-| VIP      | Todas   |
-| Anual    | Todas   |
-
-Proceso:
-
-```
-Seleccionar tipo
-↓
-Crear ticket
-↓
-Guardar transacción
-↓
-Generar ticket digital
-↓
-Retornar resultado
-```
-
----
-
-## Use Case 3 — Validate Access
-
-Input:
-
-```
-ticket + attraction
-```
-
-Motor de reglas:
-
-```
-if VIP or ANUAL -> allow
-if BASIC/FAMILY && BASIC attraction -> allow
-else deny
-```
-
----
-
-## Use Case 4 — Generate Ticket
-
-Responsabilidades:
-
-* ID único
-* Fecha
-* Fuerza G destacada
-* Código QR (posterior)
-
----
-
-# 🖥️ FASE 3 — UI ADAPTATIVA
-
-Principio:
-
-👉 **UNA APP — MÚLTIPLES EXPERIENCIAS**
-
----
-
-## Breakpoints
-
-| Plataforma | Layout  |
-| ---------- | ------- |
-| < 600px    | Mobile  |
-| 600–1000   | Tablet  |
-| >1000      | Desktop |
-
----
-
-## Layout Strategy
-
-```
-ResponsiveLayout(
- mobile: MobileScaffold,
- tablet: TabletScaffold,
- desktop: DesktopScaffold
-)
-```
-
----
-
-## Navegación
-
-Recomendado:
-
-```
-GoRouter
-```
-
-Rutas:
-
-```
-/login
-/dashboard
-/attractions
-/tickets
-/employees
-```
-
----
-
-## UX Antigravity Concept
-
-Elementos visuales:
-
-* tarjetas flotantes
-* sombras suaves
-* animaciones verticales
-* indicadores de G-Force
-
----
-
-# 🖥️ FASE 4 — HARDWARE & DESKTOP
-
-Aquí el proyecto se vuelve **nivel enterprise**.
-
----
-
-## Windows Shortcuts
-
-| Acción           | Shortcut |
-| ---------------- | -------- |
-| Nueva venta      | CTRL + N |
-| Buscar atracción | CTRL + F |
-| Dashboard        | CTRL + D |
-| Imprimir         | CTRL + P |
-
----
-
-## Generación de Recibos PDF
-
-Contenido:
-
-* Logo Antigravity
-* Tipo boleto
-* Fecha
-* ID transacción
-* Fuerza G máxima incluida
-* QR Code
-
-Librería sugerida:
-
-```
-pdf + printing
-```
-
----
-
-## Desktop UX
-
-* navegación lateral permanente
-* mouse hover effects
-* soporte teclado completo
-
----
-
-# 3️⃣ DICCIONARIO DE DATOS
-
----
-
-## Tabla: employees
-
-| Campo         | Tipo       |
-| ------------- | ---------- |
-| id            | INTEGER PK |
-| name          | TEXT       |
-| role          | TEXT       |
-| username      | TEXT       |
-| password_hash | TEXT       |
-| created_at    | TEXT       |
-
-Relación:
-
-```
-Employee 1:N Transactions
-```
-
----
-
-## Tabla: attractions
-
-| Campo      | Tipo             |
-| ---------- | ---------------- |
-| id         | INTEGER PK       |
-| name       | TEXT             |
-| type       | TEXT (BASIC/VIP) |
-| g_force    | REAL             |
-| min_height | REAL             |
-| status     | TEXT             |
-
----
-
-## Tabla: tickets
-
-| Campo       | Tipo       |
-| ----------- | ---------- |
-| id          | INTEGER PK |
-| type        | TEXT       |
-| price       | REAL       |
-| valid_until | TEXT       |
-| created_at  | TEXT       |
-
----
-
-## Tabla: transactions
-
-| Campo       | Tipo       |
-| ----------- | ---------- |
-| id          | INTEGER PK |
-| employee_id | FK         |
-| ticket_id   | FK         |
-| total       | REAL       |
-| created_at  | TEXT       |
-
-Relaciones:
-
-```
-Employee 1:N Transaction
-Ticket 1:1 Transaction
-```
-
----
-
-# 4️⃣ ESTÁNDARES DE CALIDAD
-
----
-
-## Naming Convention
-
-| Elemento   | Convención      |
-| ---------- | --------------- |
-| Clases     | PascalCase      |
-| Variables  | camelCase       |
-| Archivos   | snake_case.dart |
-| Constantes | UPPER_CASE      |
-| Widgets    | PascalCase      |
-
----
-
-## Arquitectura Obligatoria
-
-❌ UI llama DB directamente
-❌ Widgets con lógica
-❌ Models en Presentation
-
-✅ UI → UseCase → Repository → Datasource
-
----
-
-## Manejo de Errores (Funcional)
-
-Usar patrón:
-
-```
-Result<Success, Failure>
-```
-
-Failures:
-
-```
-DatabaseFailure
-AuthFailure
-ValidationFailure
-AccessDeniedFailure
-```
-
----
-
-## Reglas de Ingeniería
-
-### 🔒 Inmutabilidad
-
-Entities nunca cambian.
-
-### 🧪 Testabilidad
-
-Cada UseCase testeable sin Flutter.
-
-### ♻️ Dependency Injection
-
-Toda dependencia registrada en:
-
-```
-injector.dart
-```
-
----
-
-## Linting Profesional
-
-`analysis_options.yaml`
-
-* evitar dynamic
-* evitar nullable innecesario
-* prefer const
-* prefer final
-
----
-
-# 🧭 VISIÓN ARQUITECTÓNICA FINAL
-
-Antigravity queda diseñado como:
-
-✅ Modular
-✅ Multiplataforma real
-✅ Offline First
-✅ Escalable
-✅ Enterprise Ready
-✅ Clean Architecture pura
-
----
-
-# ✅ ENTREGABLE COMPLETADO
-
-Has recibido:
-
-✔ Estructura profesional completa
-✔ GIGA-PLAN por fases
-✔ Diccionario de datos
-✔ Estándares de calidad
-
----
-
-# 🚀 ANTIGRAVITY — FASE 1 (CORE & DATA)
-
-Objetivo:
-
-✅ Base profesional
-✅ Multiplataforma
-✅ Clean Architecture real
-✅ Offline First
-✅ Lista para crecer
-
----
-
-# 1️⃣ CREAR EL PROYECTO
-
-```bash
-flutter create antigravity
-cd antigravity
-```
-
----
-
-# 2️⃣ DEPENDENCIAS OFICIALES
-
-Editar `pubspec.yaml`
-
-```yaml
 dependencies:
   flutter:
     sdk: flutter
 
-  # Functional
+  # Functional Programming
   equatable: ^2.0.5
   dartz: ^0.10.1
 
-  # DI
+  # Dependency Injection
   get_it: ^7.7.0
 
-  # Database
+  # Local Database (Mobile + Windows)
   sqflite: ^2.3.3
   path: ^1.9.0
 
-  # Web database
+  # Web Database
   hive: ^2.2.3
   hive_flutter: ^1.1.0
 
   # Utilities
   uuid: ^4.4.0
-```
 
----
-
-# 3️⃣ CREAR ESTRUCTURA BASE
-
-Dentro de `lib/`
-
-```
-lib/
- └── src/
-     ├── core/
-     ├── domain/
-     └── data/
-```
-
----
-
-# 4️⃣ CORE LAYER
-
-El CORE es el **cerebro técnico**.
-
----
-
-## 📁 core/error/failures.dart
-
-```dart
-abstract class Failure {
-  final String message;
-  const Failure(this.message);
-}
-
-class DatabaseFailure extends Failure {
-  const DatabaseFailure(super.message);
-}
-
-class AuthFailure extends Failure {
-  const AuthFailure(super.message);
-}
-
-class ValidationFailure extends Failure {
-  const ValidationFailure(super.message);
-}
-
-class AccessDeniedFailure extends Failure {
-  const AccessDeniedFailure(super.message);
-}
-```
-
----
-
-## 📁 core/error/result.dart
-
-👉 Manejo funcional profesional.
-
-```dart
-import 'package:dartz/dartz.dart';
-import 'failures.dart';
-
-typedef Result<T> = Either<Failure, T>;
-```
-
----
-
-## 📁 core/constants/db_constants.dart
-
-```dart
-class DBConstants {
-  static const databaseName = 'antigravity.db';
-
-  static const employeeTable = 'employees';
-  static const attractionTable = 'attractions';
-  static const ticketTable = 'tickets';
-  static const transactionTable = 'transactions';
-}
-```
-
----
-
-## 📁 core/database/database_factory.dart
-
-Detecta plataforma automáticamente.
-
-```dart
-import 'package:flutter/foundation.dart';
-import 'sqflite_service.dart';
-import 'hive_service.dart';
-
-abstract class DatabaseService {}
-
-class DatabaseFactory {
-  static DatabaseService create() {
-    if (kIsWeb) {
-      return HiveService();
-    }
-    return SqfliteService();
-  }
-}
-```
-
----
-
-## 📁 core/database/sqflite_service.dart
-
-```dart
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
-
-import '../constants/db_constants.dart';
-import 'database_factory.dart';
-
-class SqfliteService implements DatabaseService {
-  Database? _db;
-
-  Future<Database> get database async {
-    if (_db != null) return _db!;
-
-    final path = join(await getDatabasesPath(), DBConstants.databaseName);
-
-    _db = await openDatabase(
-      path,
-      version: 1,
-      onCreate: (db, version) async {
-        await db.execute('''
-        CREATE TABLE employees(
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          name TEXT,
-          role TEXT,
-          username TEXT,
-          password_hash TEXT
-        )
-        ''');
-
-        await db.execute('''
-        CREATE TABLE attractions(
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          name TEXT,
-          type TEXT,
-          g_force REAL,
-          min_height REAL,
-          status TEXT
-        )
-        ''');
-
-        await db.execute('''
-        CREATE TABLE tickets(
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          type TEXT,
-          price REAL,
-          valid_until TEXT
-        )
-        ''');
-
-        await db.execute('''
-        CREATE TABLE transactions(
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          employee_id INTEGER,
-          ticket_id INTEGER,
-          total REAL,
-          created_at TEXT
-        )
-        ''');
-      },
-    );
-
-    return _db!;
-  }
-}
-```
-
----
-
-## 📁 core/database/hive_service.dart
-
-```dart
-import 'package:hive_flutter/hive_flutter.dart';
-import 'database_factory.dart';
-
-class HiveService implements DatabaseService {
-
-  Future<void> init() async {
-    await Hive.initFlutter();
-
-    await Hive.openBox('employees');
-    await Hive.openBox('attractions');
-    await Hive.openBox('tickets');
-    await Hive.openBox('transactions');
-  }
-}
-```
-
----
-
-# 5️⃣ DOMAIN LAYER (💎 MÁS IMPORTANTE)
-
-Aquí vive el negocio REAL.
-
----
-
-## 📁 domain/value_objects/ticket_type.dart
-
-```dart
-enum TicketType {
-  basic,
-  vip,
-  family,
-  annual,
-}
-```
-
----
-
-## 📁 domain/value_objects/attraction_type.dart
-
-```dart
-enum AttractionType {
-  basic,
-  vip,
-}
-```
-
----
-
-## 📁 domain/value_objects/gforce.dart
-
-```dart
-class GForce {
-  final double value;
-
-  const GForce(this.value) : assert(value >= 0);
-
-  bool get isExtreme => value >= 4.0;
-}
-```
-
----
-
-## 📁 domain/entities/employee.dart
-
-```dart
-import 'package:equatable/equatable.dart';
-
-class Employee extends Equatable {
-  final int? id;
-  final String name;
-  final String role;
-  final String username;
-
-  const Employee({
-    this.id,
-    required this.name,
-    required this.role,
-    required this.username,
-  });
-
-  @override
-  List<Object?> get props => [id, name, role, username];
-}
-```
-
----
-
-## 📁 domain/entities/attraction.dart
-
-```dart
-import 'package:equatable/equatable.dart';
-import '../value_objects/attraction_type.dart';
-import '../value_objects/gforce.dart';
-
-class Attraction extends Equatable {
-  final int? id;
-  final String name;
-  final AttractionType type;
-  final GForce gForce;
-  final double minHeight;
-
-  const Attraction({
-    this.id,
-    required this.name,
-    required this.type,
-    required this.gForce,
-    required this.minHeight,
-  });
-
-  @override
-  List<Object?> get props => [id, name, type, gForce, minHeight];
-}
-```
-
----
-
-## 📁 domain/entities/ticket.dart
-
-```dart
-import 'package:equatable/equatable.dart';
-import '../value_objects/ticket_type.dart';
-
-class Ticket extends Equatable {
-  final int? id;
-  final TicketType type;
-  final double price;
-  final DateTime validUntil;
-
-  const Ticket({
-    this.id,
-    required this.type,
-    required this.price,
-    required this.validUntil,
-  });
-
-  @override
-  List<Object?> get props => [id, type, price, validUntil];
-}
-```
-
----
-
-## 📁 domain/entities/transaction.dart
-
-```dart
-import 'package:equatable/equatable.dart';
-
-class Transaction extends Equatable {
-  final int? id;
-  final int employeeId;
-  final int ticketId;
-  final double total;
-  final DateTime createdAt;
-
-  const Transaction({
-    this.id,
-    required this.employeeId,
-    required this.ticketId,
-    required this.total,
-    required this.createdAt,
-  });
-
-  @override
-  List<Object?> get props =>
-      [id, employeeId, ticketId, total, createdAt];
-}
-```
-
----
-
-## 📁 domain/repositories/ticket_repository.dart
-
-```dart
-import '../../core/error/result.dart';
-import '../entities/ticket.dart';
-
-abstract class TicketRepository {
-  Future<Result<Ticket>> createTicket(Ticket ticket);
-  Future<Result<List<Ticket>>> getTickets();
-}
-```
-
----
-
-## 📁 domain/repositories/attraction_repository.dart
-
-```dart
-import '../../core/error/result.dart';
-import '../entities/attraction.dart';
-
-abstract class AttractionRepository {
-  Future<Result<List<Attraction>>> getAttractions();
-}
-```
-
----
-
-## 📁 domain/repositories/employee_repository.dart
-
-```dart
-import '../../core/error/result.dart';
-import '../entities/employee.dart';
-
-abstract class EmployeeRepository {
-  Future<Result<Employee>> login(
-    String username,
-    String password,
-  );
-}
-```
-
----
-
-# 6️⃣ DATA LAYER
-
-Aquí conectamos dominio con base de datos.
-
----
-
-## 📁 data/models/employee_model.dart
-
-```dart
-import '../../domain/entities/employee.dart';
-
-class EmployeeModel extends Employee {
-  const EmployeeModel({
-    super.id,
-    required super.name,
-    required super.role,
-    required super.username,
-  });
-
-  factory EmployeeModel.fromMap(Map<String, dynamic> map) {
-    return EmployeeModel(
-      id: map['id'],
-      name: map['name'],
-      role: map['role'],
-      username: map['username'],
-    );
-  }
-
-  Map<String, dynamic> toMap() => {
-        'id': id,
-        'name': name,
-        'role': role,
-        'username': username,
-      };
-}
-```
-
----
-
-## 📁 data/datasources/local/employee_local_ds.dart
-
-```dart
-abstract class EmployeeLocalDataSource {
-  Future<Map<String, dynamic>?> login(
-    String username,
-    String password,
-  );
-}
-```
-
-(La implementación real se hará en Fase 2.)
-
----
-
-# ✅ FASE 1 COMPLETADA
-
-Ya tienes:
-
-✅ Clean Architecture real
-✅ Entidades inmutables
-✅ Value Objects profesionales
-✅ Persistencia multiplataforma
-✅ Repositorios abstractos
-✅ Base empresarial lista
-
----
-AAAAA ya entendí 😄
-👉 **NO código**
-👉 **SOLO PLAN DE IMPLEMENTACIÓN**
-👉 Igual que la **Fase 1**
-👉 **Fases 2, 3 y 4 juntas** para copiar y pegar.
-
-Aquí va el **MASTER PLAN COMPLETO** de ingeniería.
-
----
-
-# 🚀 ANTIGRAVITY — PLAN MAESTRO DE IMPLEMENTACIÓN
-
-## FASES 2, 3 Y 4
-
----
-
-# 🧠 FASE 2 — BUSINESS LOGIC (DOMINIO Y REGLAS DEL PARQUE)
-
-## 🎯 Objetivo
-
-Implementar toda la **lógica real del negocio** separada totalmente de UI y Base de Datos.
-
-La aplicación debe poder funcionar incluso sin interfaz gráfica.
-
----
-
-## 🏗 Componentes Principales
-
-### 1. Repositories (Contratos del Dominio)
-
-Se definen interfaces puras:
-
-* EmployeeRepository
-* TicketRepository
-* AttractionRepository
-* SaleRepository
-
-Responsabilidad:
-
-* No conocen Flutter
-* No conocen sqflite ni Hive
-* Solo describen *qué puede hacer el sistema*
-
-Ejemplo conceptual:
-
-* loginEmployee()
-* buyTicket()
-* validateAccess()
-* getAttractions()
-
----
-
-### 2. Use Cases (Casos de Uso)
-
-Cada acción del parque se convierte en un caso de uso independiente.
-
-#### Use Cases obligatorios
-
-✅ LoginEmployee
-
-* Valida credenciales locales
-* Retorna empleado autenticado
-
-✅ BuyTicket
-
-* Crea venta
-* Genera ticket
-* Guarda transacción local
-
-✅ ValidateAccess ⭐ (CRÍTICO)
-Implementa reglas del parque:
-
-| Tipo Boleto | Acceso                   |
-| ----------- | ------------------------ |
-| Básico      | Solo Atracciones Básicas |
-| Familiar    | Solo Básicas             |
-| VIP         | Todas                    |
-| Anual       | Todas                    |
-
-Regla centralizada → **NO duplicar lógica en UI**.
-
----
-
-### 3. Value Objects
-
-Evitan errores humanos.
-
-* TicketType
-* AttractionType
-* GForce
-
-Ejemplo conceptual:
-
-```
-TicketType.basic
-TicketType.vip
-AttractionType.vip
-```
-
----
-
-### 4. Motor Antigravity (Branding Core)
-
-Cada atracción posee:
-
-* nombre
-* nivel adrenalina
-* valor G-Force
-
-El sistema permitirá:
-
-* clasificar intensidad
-* mostrar advertencias
-* futura analítica interna (sin analytics externos)
-
----
-
-### 5. Manejo Profesional de Errores
-
-Arquitectura funcional:
-
-* Result<Success, Failure>
-* AuthFailure
-* DatabaseFailure
-* ValidationFailure
-
-Regla:
-
-❌ No usar try/catch en UI
-✅ Los errores viven en Domain/Core
-
----
-
-### ✅ Resultado de Fase 2
-
-El sistema ya puede:
-
-* vender boletos
-* validar accesos
-* autenticar empleados
-* aplicar reglas del parque
-
-👉 **Sin interfaz todavía**.
-
----
-
-# 🎨 FASE 3 — UI ADAPTATIVA MULTIPLATAFORMA
-
-## 🎯 Objetivo
-
-Crear una interfaz única capaz de ejecutarse en:
-
-* Android
-* iOS
-* Web
-* Windows Desktop
-
-con un solo código Flutter.
-
----
-
-## 🧱 Estrategia de Diseño
-
-### Arquitectura Presentation
-
-Separación estricta:
-
-```
-presentation/
- ├── screens
- ├── widgets
- ├── state
- ├── navigation
- └── responsive
-```
-
----
-
-## 1. Responsive System
-
-Se crea un motor adaptativo:
-
-| Tamaño  | Layout  |
-| ------- | ------- |
-| < 800px | Mobile  |
-| ≥ 800px | Desktop |
-
----
-
-### Mobile Experience
-
-Diseño tipo app:
-
-* navegación inferior
-* flujo rápido de venta
-* botones grandes
-* operador caminando en parque
-
-Pantallas:
-
-* Login
-* Venta de boletos
-* Lista de atracciones
-* Validación de acceso
-
----
-
-### Desktop / Windows Experience
-
-Diseño tipo software empresarial:
-
-* Sidebar izquierda
-* Dashboard central
-* Panel de ventas
-* Control administrativo
-
-Pensado para:
-
-👉 taquilla principal del parque.
-
----
-
-## 2. Sistema de Navegación
-
-Se implementa navegación modular:
-
-* Router central
-* Rutas declarativas
-* Deep linking preparado
-
-Pantallas base:
-
-* Splash
-* Login
-* Dashboard
-* Ticket Sales
-* Attractions
-* Employees
-
----
-
-## 3. State Management
-
-Responsabilidad:
-
-* UI reactiva
-* desacoplada del dominio
-
-Se recomienda:
-
-✅ Riverpod (arquitectura limpia)
-
-Flujo:
-
-```
-UI → Provider → UseCase → Repository
-```
-
----
-
-## 4. Flujo de Venta (UX Principal)
-
-Proceso:
-
-1. Empleado inicia sesión
-2. Selecciona tipo de boleto
-3. Sistema calcula acceso
-4. Compra registrada
-5. Ticket generado
-6. Listo para validación
-
----
-
-### Principio Clave
-
-La UI **NO decide reglas**.
-
-Solo muestra resultados del dominio.
-
----
-
-### ✅ Resultado Fase 3
-
-Antigravity ya funciona como:
-
-✅ App móvil
-✅ Software Windows
-✅ Sistema de ventas real
-
----
-
-# 🖥 FASE 4 — HARDWARE, WINDOWS Y OPERACIÓN REAL
-
-## 🎯 Objetivo
-
-Convertir Antigravity en software profesional de parque.
-
----
-
-## 1. Soporte Desktop Completo
-
-Optimización Windows:
-
-* ventanas amplias
-* mouse + teclado
-* multitarea
-* pantallas grandes
-
----
-
-## 2. Atajos de Teclado (Operación Rápida)
-
-Ejemplos:
-
-| Atajo    | Acción          |
-| -------- | --------------- |
-| F1       | Nueva venta     |
-| F2       | Buscar boleto   |
-| F3       | Validar acceso  |
-| ESC      | Cancelar venta  |
-| CTRL + P | Imprimir ticket |
-
-Diseñado para taquilleros reales.
-
----
-
-## 3. Generación de Tickets PDF
-
-Cada compra genera:
-
-* ID de ticket
-* tipo boleto
-* fecha
-* atracciones permitidas
-* branding Antigravity
-* valor G-Force destacado
-
-Salida:
-
-* impresión directa
-* descarga PDF
-* futura integración QR
-
----
-
-## 4. Persistencia Multiplataforma
-
-| Plataforma          | Tecnología |
-| ------------------- | ---------- |
-| Android/iOS/Windows | sqflite    |
-| Web                 | Hive       |
-
-Factory Pattern decide automáticamente.
-
----
-
-## 5. Offline First
-
-Sistema completo funciona:
-
-✅ sin internet
-✅ sin servidores
-✅ sin Firebase Analytics
-
-Ideal para parques reales.
-
----
-
-## 6. Preparación Hardware Futuro
-
-Arquitectura lista para:
-
-* lectores QR
-* escáner código barras
-* impresoras térmicas
-* kioscos autoservicio
-
----
-
-### ✅ Resultado Fase 4
-
-Antigravity se convierte en:
-
-⭐ Software profesional de operación de parque
-⭐ Sistema multiplataforma real
-⭐ Arquitectura escalable empresarial
-
----
-
-# 🏁 ESTADO FINAL DEL PROYECTO
-
-Después de las 4 fases:
-
-✔ Clean Architecture completa
-✔ Dominio desacoplado
-✔ UI adaptable
-✔ Motor de reglas del parque
-✔ Venta real de boletos
-✔ Operación Windows profesional
-✔ Offline First
-
----
+  # Responsive UI
+  flutter_screenutil: ^5.9.0
+
+  # PDF Desktop
+  pdf: ^3.10.8
+  printing: ^5.12.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+🚫 NO Firebase
+🚫 NO Analytics
+🚫 NO Backend Cloud
+
+🎨 3. IDENTIDAD VISUAL — ANTIGRAVITY
+Concepto visual
+
+Sistema futurista inspirado en:
+
+Antigravedad
+Física extrema
+Fuerza G
+Experiencias inmersivas
+Paleta Oficial
+Elemento	Color
+Primario	Morado Oscuro
+Secundario	Violeta Neón
+Acento	Magenta
+Fondo	Negro Espacial
+Cards	Morado Translúcido
+
+UI estilo:
+
+✅ Neon Theme
+✅ Glassmorphism
+✅ Dark First Design
+
+🧠 4. DICCIONARIO DE DATOS (BASE LOCAL)
+EMPLOYEE
+Campo	Tipo
+id	TEXT UUID
+name	TEXT
+role	TEXT
+username	TEXT
+password	TEXT
+active	INTEGER
+ATTRACTION
+Campo	Tipo
+id	TEXT
+name	TEXT
+type	BASIC / VIP
+minHeight	REAL
+gForce	REAL
+status	TEXT
+TICKET
+Campo	Tipo
+id	TEXT
+type	BASIC / VIP / FAMILY / ANNUAL
+price	REAL
+purchaseDate	TEXT
+validUntil	TEXT
+SALE
+Campo	Tipo
+id	TEXT
+ticketId	TEXT
+employeeId	TEXT
+total	REAL
+timestamp	TEXT
+Relaciones
+Employee 1 ---- N Sale
+Sale 1 ---- 1 Ticket
+Ticket N ---- N Attraction (por reglas)
+⚙️ 5. REGLAS DE NEGOCIO (CORE)
+🎟 Tipos de boletos
+Tipo	Acceso
+Básico	Atracciones Básicas
+Familiar	Atracciones Básicas
+VIP	Todas
+Anual	Todas
+Validación de acceso
+IF ticket == BASIC/FAMILY
+   -> only BASIC attractions
+
+IF ticket == VIP/ANNUAL
+   -> FULL ACCESS
+Branding obligatorio
+
+Cada atracción incluye:
+
+G-Force Rating
+
+Ejemplo:
+
+HyperLoop → 4.7G
+🚀 6. GIGA PLAN DE IMPLEMENTACIÓN
+✅ FASE 1 — CORE & DATA
+Objetivo
+
+Construir la base arquitectónica estable.
+
+Actividades
+Configurar Clean Architecture
+Crear entidades inmutables
+Implementar repositorios abstractos
+Configurar DI con GetIt
+Inicializar DB local
+Persistencia
+Plataforma	DB
+Android	sqflite
+iOS	sqflite
+Windows	sqflite
+Web	Hive
+Resultado
+
+✔ Dominio independiente
+✔ Base lista para lógica
+
+✅ FASE 2 — BUSINESS LOGIC
+Use Cases principales
+LoginEmployee
+valida credenciales locales
+sesión offline
+BuyTicket
+genera UUID
+guarda venta
+crea ticket
+ValidateAccess
+verifica permiso por tipo
+compara con atracción
+GenerateTicket
+prepara información del recibo
+Patrón
+UI → Controller → UseCase → Repository → DataSource
+
+Resultado:
+
+✔ Sistema funcional completo
+✔ Reglas centralizadas
+
+✅ FASE 3 — UI ADAPTATIVA
+Objetivo
+
+Una sola app → múltiples dispositivos.
+
+Breakpoints
+Device	Layout
+Mobile	Bottom Navigation
+Tablet	Hybrid
+Windows	Sidebar Navigation
+Web	Responsive Grid
+Pantallas
+Login
+Dashboard
+Atracciones
+Venta de boletos
+Configuración
+Diseño Antigravity
+tonos morados
+animaciones suaves
+tarjetas flotantes
+indicadores G-Force
+
+Resultado:
+
+✔ Experiencia multiplataforma real
+
+✅ FASE 4 — HARDWARE & DESKTOP
+Windows Features
+
+✔ Atajos de teclado:
+
+Acción	Shortcut
+Nueva venta	CTRL + N
+Buscar	CTRL + F
+Imprimir	CTRL + P
+PDF Ticket
+
+Contenido:
+
+ANTIGRAVITY PARK
+Ticket ID
+Tipo
+Precio
+Fecha
+Empleado
+QR interno
+
+Generado localmente.
+
+Web
+
+Hive Storage
+Offline Ready
+
+Resultado final:
+
+✔ Sistema profesional offline
+✔ Desktop Ready
+
+🧩 7. ESTÁNDARES DE CALIDAD
+Naming
+Elemento	Regla
+Clases	PascalCase
+Variables	camelCase
+Archivos	snake_case
+Interfaces	abstract class
+Manejo de errores
+
+Uso obligatorio:
+
+Either<Failure, Success>
+
+Tipos:
+
+DatabaseFailure
+AuthFailure
+ValidationFailure
+Clean Architecture Rules
+
+🚫 Presentation NO conoce Data
+🚫 Data NO conoce UI
+✅ Domain independiente
+
+Testing Strategy
+Unit Test → UseCases
+Widget Test → UI
+Repository Mocking
+🛑 RESTRICCIONES OFICIALES DEL PROYECTO
+
+✔ Flutter Multiplataforma
+✔ Sin Firebase
+✔ Sin Analytics
+✔ Sin backend cloud
+✔ Solo base local
+✔ No modo producción Android
+
+🏁 RESULTADO ESPERADO
+
+ANTIGRAVITY será:
+
+Sistema empresarial offline
+Arquitectura escalable
+Desktop + Mobile + Web
+Clean Architecture real
+Branding científico basado en Fuerza G
 
 # PROMPT
- Actúa como un Senior Fullstack Software Architect especializado en Flutter 3.x, Clean Architecture, Domain Driven Design y desarrollo multiplataforma profesional.
 
-NO actúes como tutor. NO simplifiques. NO resumas. NO generes código fuente todavía. NO expliques conceptos básicos.
+Actúa como un Senior Fullstack Software Architect especializado en:
 
-Tu rol es diseñar documentación técnica profesional lista para ingeniería real.
+Flutter 3.x
+Clean Architecture
+Domain Driven Design
+Arquitectura multiplataforma profesional
+Desarrollo Desktop + Mobile + Web
+Ingeniería de software empresarial
 
-PROYECTO: Diseñar desde cero la plataforma multiplataforma llamada ANTIGRAVITY, un sistema profesional de gestión para un parque de atracciones.
+NO actúes como tutor.
+NO simplifiques explicaciones.
+NO hagas resúmenes.
+NO generes código fuente todavía.
+NO expliques conceptos básicos.
 
-Debe funcionar en:
+Tu objetivo es generar documentación técnica profesional lista para ingeniería real, como si fuera entregada por un arquitecto senior antes del desarrollo.
+
+PROYECTO
+
+Diseñar desde cero la plataforma ANTIGRAVITY.
+
+ANTIGRAVITY es un sistema profesional multiplataforma para la gestión de un parque de atracciones.
+
+Debe ejecutarse en:
 
 Android
 iOS
 Web
 Windows Desktop
-OBJETIVO GENERAL:
 
-Crear el PLAN MAESTRO DE INGENIERÍA COMPLETO siguiendo estándares de software enterprise.
+El sistema debe ser altamente escalable, modular y seguir estándares industriales reales.
 
-El sistema debe ser:
+CONTEXTO DE NEGOCIO
 
-escalable
-mantenible
-offline-first
-desacoplado
-multiplataforma
-profesional
-REGLAS DE NEGOCIO (OBLIGATORIAS):
+El sistema incluye:
 
-Sistema de empleados local con roles.
-Sistema de venta de boletos con 4 tipos:
+1. Mantenimiento de Usuarios
+Base de datos LOCAL.
+Empleados con roles.
+Login offline.
+Sin servicios cloud.
+2. Sistema de Boletos (CRÍTICO)
+
+Tipos obligatorios:
+
 Básico
 VIP
 Familiar
 Anual
-Jerarquía de Atracciones:
-Atracciones Básicas
-Atracciones VIP
-Reglas de acceso:
-Básico y Familiar → SOLO atracciones básicas
-VIP y Anual → acceso total
-Branding obligatorio:
-Cada atracción debe tener atributo: "G-Force" (fuerza G) como identidad Antigravity.
 
-Flujo de Venta:
-Empleado inicia sesión → Compra boleto → Registro en base local → Generación automática de ticket.
+Reglas:
 
-RESTRICCIONES TÉCNICAS (MUY IMPORTANTES):
+Boletos Básicos y Familiares → solo atracciones Básicas.
+Boletos VIP y Anuales → acceso TOTAL.
+3. Jerarquía de Atracciones
 
-Arquitectura: ✔ Clean Architecture estricta
+Cada atracción debe incluir:
 
-Capas obligatorias:
+nombre
+tipo (Basic/VIP)
+altura mínima
+estado
+valor G-Force (Fuerza G) obligatorio como atributo de branding Antigravity.
+4. Flujo de Venta
 
-Core
-Domain
-Data
-Presentation
+Debe existir:
+
+botón de compra
+registro de transacción
+almacenamiento local
+generación de ticket
+recibo PDF
+RESTRICCIONES TÉCNICAS (OBLIGATORIAS)
+
+Arquitectura:
+
+Clean Architecture estricta.
+Separación Domain / Data / Presentation.
+
 Persistencia:
 
-sqflite para Mobile y Desktop
-Hive para Web
-PROHIBIDO:
+sqflite → Android / iOS / Windows
+Hive → Web
 
-Firebase Analytics
-SDKs de tracking
-Backend online
-Servicios cloud pesados
-Sistema completamente LOCAL.
+Prohibiciones:
 
-ENTREGABLES QUE DEBES GENERAR:
+NO Firebase
+NO Analytics
+NO SDK de rastreo
+NO backend cloud
+NO configuraciones de producción Android
 
-ENTREGA TODO EN UN SOLO DOCUMENTO EXTENSO.
+La aplicación será OFFLINE FIRST.
 
-NO DIVIDIR RESPUESTAS.
+IDENTIDAD VISUAL
 
-1️⃣ ESTRUCTURA PROFESIONAL DE ARCHIVOS
+Diseñar concepto visual:
 
-Genera el árbol completo del proyecto Flutter incluyendo:
+estilo futurista
+ciencia y antigravedad
+interfaz en tonos morados
+dark theme
+UI profesional empresarial
+ENTREGABLES OBLIGATORIOS
 
-lib/src/core lib/src/domain lib/src/data lib/src/presentation
+Genera TODO lo siguiente en un único documento profesional:
 
-Mostrar directorios y archivos .dart.
+1️⃣ ESTRUCTURA DE ARCHIVOS PROFESIONAL
 
-2️⃣ PLAN DE IMPLEMENTACIÓN COMPLETO
+Mostrar árbol completo desde la raíz:
 
-Genera TODAS las fases completas:
+pubspec.yaml
+lib/src/core
+lib/src/domain
+lib/src/data
+lib/src/presentation
 
-FASE 1 — Core & Data
+Debe llegar hasta archivos .dart reales.
 
-entidades
-DTOs
-persistencia local
-factory database
-manejo de errores
-FASE 2 — Business Logic
+Debe seguir estándares Clean Architecture industriales.
 
-repositories
-use cases
-reglas del parque
-validación de accesos
-value objects
-FASE 3 — UI Adaptativa
+2️⃣ DEPENDENCIAS OFICIALES
 
-diseño mobile vs desktop
-navegación
-flujo de venta
-state management
-arquitectura presentation
-FASE 4 — Desktop & Hardware
+Incluir sección completa de pubspec.yaml con:
 
-atajos teclado Windows
-generación PDF
-offline-first
-preparación hardware futuro
-Cada fase debe explicarse como PLAN DE IMPLEMENTACIÓN PROFESIONAL.
+equatable
+dartz
+get_it
+sqflite
+hive
+uuid
+utilidades necesarias
+librerías PDF desktop
 
-NO incluir código.
+NO agregar analytics ni servicios cloud.
 
 3️⃣ DICCIONARIO DE DATOS
 
-Definir:
+Definir tablas locales:
 
-tablas
+Employee
+Attraction
+Ticket
+Sale
+
+Incluir:
+
 campos
 tipos
-relaciones (1:N, N:M)
-claves primarias y foráneas
-4️⃣ ESTÁNDARES DE CALIDAD
+claves
+relaciones 1 y N
+reglas de negocio relacionadas.
+4️⃣ GIGA PLAN DE IMPLEMENTACIÓN
+
+Desarrollar un plan EXTENSO dividido en 4 fases completas:
+
+Fase 1 — Core & Data
+entidades inmutables
+DTOs
+mappers
+repositorios abstractos
+configuración base de datos
+dependency injection
+Fase 2 — Business Logic
+Use Cases
+Login empleado
+Comprar boleto
+Validar acceso
+Generar ticket
+Fase 3 — UI Adaptativa
+layouts responsive
+diferencias Mobile vs Windows
+navegación profesional
+diseño Antigravity
+Fase 4 — Hardware & Desktop
+atajos teclado Windows
+generación PDF
+funcionamiento offline
+almacenamiento web Hive
+
+Cada fase debe parecer planificación de ingeniería real.
+
+5️⃣ ESTÁNDARES DE CALIDAD
 
 Definir:
 
-reglas de naming (camelCase, PascalCase)
-manejo de errores funcional
-convenciones arquitectónicas
-responsabilidades por capa
-principios SOLID aplicados
-FORMATO DE RESPUESTA:
+reglas de nombrado
+manejo de errores funcional (Either<Failure, Success>)
+principios Clean Architecture
+testing strategy
+separación de capas
+FORMATO DE RESPUESTA
 
-Documento técnico profesional
-Extenso
-Bien estructurado
-Nivel arquitecto senior
-Sin explicaciones educativas
-Sin ejemplos simples
-Sin código fuente
-OBJETIVO FINAL:
+La respuesta debe:
 
-Generar la documentación base completa para iniciar el desarrollo profesional del sistema Antigravity.
+verse como documentación empresarial real
+estar organizada por secciones claras
+lista para copiar y pegar
+sin explicaciones educativas
+sin ejemplos simples
+sin código de implementación todavía
 
+Debe sentirse como un Architecture Master Plan profesional.
+
+INSTRUCCIÓN FINAL:
+
+Genera el documento completo del proyecto ANTIGRAVITY ahora.
