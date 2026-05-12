@@ -394,210 +394,335 @@ Branding científico basado en Fuerza G
 
 # PROMPT
 
-Actúa como un Senior Fullstack Software Architect especializado en:
+Actúa como un **Senior Fullstack Software Architect** especializado en:
 
-Flutter 3.x
-Clean Architecture
-Domain Driven Design
-Arquitectura multiplataforma profesional
-Desarrollo Desktop + Mobile + Web
-Ingeniería de software empresarial
+* Flutter 3.x
+* Clean Architecture
+* Domain Driven Design
+* Arquitectura multiplataforma profesional
+* Desarrollo Desktop + Mobile + Web
+* Ingeniería de software empresarial
+
+---
+
+## REGLAS DE COMPORTAMIENTO
 
 NO actúes como tutor.
 NO simplifiques explicaciones.
 NO hagas resúmenes.
-NO generes código fuente todavía.
 NO expliques conceptos básicos.
+NO generes código fuente todavía.
 
-Tu objetivo es generar documentación técnica profesional lista para ingeniería real, como si fuera entregada por un arquitecto senior antes del desarrollo.
+Tu objetivo es generar **documentación técnica profesional**, como si fuera entregada por un **Software Architect Senior antes del desarrollo real**.
 
-PROYECTO
+El resultado debe sentirse como un **Architecture Master Plan empresarial**.
 
-Diseñar desde cero la plataforma ANTIGRAVITY.
+---
 
-ANTIGRAVITY es un sistema profesional multiplataforma para la gestión de un parque de atracciones.
+# PROYECTO
+
+Diseñar desde cero la plataforma:
+
+# **ANTIGRAVITY**
+
+Sistema profesional multiplataforma para la gestión integral de un parque de atracciones.
 
 Debe ejecutarse en:
 
-Android
-iOS
-Web
-Windows Desktop
+* Android
+* iOS
+* Web
+* Windows Desktop
 
-El sistema debe ser altamente escalable, modular y seguir estándares industriales reales.
+El sistema debe ser:
 
-CONTEXTO DE NEGOCIO
+* Escalable
+* Modular
+* Offline First
+* Enterprise Grade
 
-El sistema incluye:
+---
 
-1. Mantenimiento de Usuarios
-Base de datos LOCAL.
-Empleados con roles.
-Login offline.
-Sin servicios cloud.
-2. Sistema de Boletos (CRÍTICO)
+# CONTEXTO DE NEGOCIO
+
+## 1. Gestión de Usuarios
+
+* Base de datos LOCAL
+* Empleados con roles
+* Login offline
+* Sin backend cloud
+* Sin autenticación remota
+
+---
+
+## 2. Sistema de Boletos (CRÍTICO)
 
 Tipos obligatorios:
 
-Básico
-VIP
-Familiar
-Anual
+* Básico
+* VIP
+* Familiar
+* Anual
 
-Reglas:
+### Reglas de acceso
 
-Boletos Básicos y Familiares → solo atracciones Básicas.
-Boletos VIP y Anuales → acceso TOTAL.
-3. Jerarquía de Atracciones
+* Básico + Familiar → solo atracciones Básicas
+* VIP + Anual → acceso TOTAL
 
-Cada atracción debe incluir:
+---
 
-nombre
-tipo (Basic/VIP)
-altura mínima
-estado
-valor G-Force (Fuerza G) obligatorio como atributo de branding Antigravity.
-4. Flujo de Venta
+## 3. Jerarquía de Atracciones
+
+Cada atracción debe contener:
+
+* nombre
+* tipo (Basic / VIP)
+* altura mínima
+* estado
+* **valor G-Force (Fuerza G)** obligatorio como branding Antigravity
+
+---
+
+## 4. Flujo de Venta
 
 Debe existir:
 
-botón de compra
-registro de transacción
-almacenamiento local
-generación de ticket
-recibo PDF
-RESTRICCIONES TÉCNICAS (OBLIGATORIAS)
+* botón de compra
+* registro de transacción
+* almacenamiento local
+* generación automática de ticket
+* recibo PDF
+
+---
+
+# RESTRICCIONES TÉCNICAS (OBLIGATORIAS)
 
 Arquitectura:
 
-Clean Architecture estricta.
-Separación Domain / Data / Presentation.
+* Clean Architecture estricta
+* Separación Domain / Data / Presentation
 
 Persistencia:
 
-sqflite → Android / iOS / Windows
-Hive → Web
+* sqflite → Android / iOS / Windows
+* Hive → Web
 
-Prohibiciones:
+Prohibido:
 
-NO Firebase
-NO Analytics
-NO SDK de rastreo
-NO backend cloud
-NO configuraciones de producción Android
+* Firebase
+* Analytics
+* SDK de rastreo
+* Backend cloud
+* Configuración Android production
 
-La aplicación será OFFLINE FIRST.
+El sistema es **100% OFFLINE FIRST**.
 
-IDENTIDAD VISUAL
+---
+
+# IDENTIDAD VISUAL
 
 Diseñar concepto visual:
 
-estilo futurista
-ciencia y antigravedad
-interfaz en tonos morados
-dark theme
-UI profesional empresarial
-ENTREGABLES OBLIGATORIOS
+* estética futurista
+* ciencia / antigravedad
+* interfaz profesional empresarial
+* dark theme
+* tonos morados
+* branding tecnológico ANTIGRAVITY
 
-Genera TODO lo siguiente en un único documento profesional:
+---
 
-1️⃣ ESTRUCTURA DE ARCHIVOS PROFESIONAL
+# MODELO DE DATOS BASE (OBLIGATORIO INTEGRAR)
 
-Mostrar árbol completo desde la raíz:
+Usar estas tablas como referencia del dominio:
 
-pubspec.yaml
-lib/src/core
-lib/src/domain
-lib/src/data
-lib/src/presentation
+## Cliente
 
-Debe llegar hasta archivos .dart reales.
+id INT PK
+nombre VARCHAR(80) NOT NULL
+apellido VARCHAR(80) NOT NULL
+fecha_nacimiento DATE
+email VARCHAR(120) UNIQUE
+telefono VARCHAR(20)
+documento VARCHAR(30) UNIQUE
 
-Debe seguir estándares Clean Architecture industriales.
+## Entrada
 
-2️⃣ DEPENDENCIAS OFICIALES
+id INT PK
+cliente_id INT FK
+tipo_entrada_id INT FK
+fecha_visita DATE NOT NULL
+precio DECIMAL(8,2) NOT NULL
+descuento DECIMAL(5,2) DEFAULT 0
+estado ENUM(vendida/usada/cancelada)
+canal_venta VARCHAR(30)
 
-Incluir sección completa de pubspec.yaml con:
+## TipoEntrada
 
-equatable
-dartz
-get_it
-sqflite
-hive
-uuid
-utilidades necesarias
-librerías PDF desktop
+id INT PK
+nombre VARCHAR(60)
+precio_base DECIMAL(8,2)
+descripcion TEXT
+vigencia_horas INT
 
-NO agregar analytics ni servicios cloud.
+## Atraccion
 
-3️⃣ DICCIONARIO DE DATOS
+id INT PK
+zona_id INT FK
+nombre VARCHAR(100)
+tipo VARCHAR(50)
+capacidad_turno INT
+duracion_min INT
+altura_minima_cm INT
+peso_maximo_kg INT
+estado ENUM(activa/mantenimiento/inactiva)
 
-Definir tablas locales:
+## Zona
 
-Employee
-Attraction
-Ticket
-Sale
+id INT PK
+nombre VARCHAR(80)
+descripcion TEXT
+capacidad_max INT
+mapa_coordenadas VARCHAR(100)
+
+## Horario
+
+id INT PK
+atraccion_id INT FK
+fecha DATE
+hora_apertura TIME
+hora_cierre TIME
+turnos_por_hora INT
+
+Estas tablas deben reflejarse conceptualmente dentro del diseño Domain Driven Design.
+
+---
+
+# ENTREGABLES OBLIGATORIOS
+
+Genera TODO en un único documento profesional:
+
+---
+
+## 1️⃣ ESTRUCTURA DE ARCHIVOS PROFESIONAL
+
+Mostrar árbol completo del proyecto desde raíz hasta archivos `.dart`.
+
+Debe incluir:
+
+* pubspec.yaml
+* lib/src/core
+* lib/src/domain
+* lib/src/data
+* lib/src/presentation
+
+Nivel empresarial real.
+
+---
+
+## 2️⃣ DEPENDENCIAS OFICIALES
+
+Incluir sección completa pubspec.yaml con:
+
+* equatable
+* dartz
+* get_it
+* sqflite
+* hive
+* uuid
+* librerías PDF Desktop
+* utilidades necesarias
+
+NO analytics.
+NO cloud.
+
+---
+
+## 3️⃣ DICCIONARIO DE DATOS
+
+Definir entidades:
+
+* Employee
+* Client
+* Attraction
+* Ticket
+* Sale
+* Zone
+* Schedule
 
 Incluir:
 
-campos
-tipos
-claves
-relaciones 1 y N
-reglas de negocio relacionadas.
-4️⃣ GIGA PLAN DE IMPLEMENTACIÓN
+* campos
+* tipos
+* claves
+* relaciones
+* reglas de negocio
 
-Desarrollar un plan EXTENSO dividido en 4 fases completas:
+---
 
-Fase 1 — Core & Data
-entidades inmutables
-DTOs
-mappers
-repositorios abstractos
-configuración base de datos
-dependency injection
-Fase 2 — Business Logic
-Use Cases
-Login empleado
-Comprar boleto
-Validar acceso
-Generar ticket
-Fase 3 — UI Adaptativa
-layouts responsive
-diferencias Mobile vs Windows
-navegación profesional
-diseño Antigravity
-Fase 4 — Hardware & Desktop
-atajos teclado Windows
-generación PDF
-funcionamiento offline
-almacenamiento web Hive
+## 4️⃣ GIGA PLAN DE IMPLEMENTACIÓN
 
-Cada fase debe parecer planificación de ingeniería real.
+Dividir en fases profesionales:
 
-5️⃣ ESTÁNDARES DE CALIDAD
+### Fase 1 — Core & Data
+
+* entidades inmutables
+* DTOs
+* mappers
+* repositorios abstractos
+* configuración DB
+* dependency injection
+
+### Fase 2 — Business Logic
+
+Use Cases:
+
+* Login empleado
+* Comprar boleto
+* Validar acceso
+* Generar ticket
+
+### Fase 3 — UI Adaptativa
+
+* layouts responsive
+* diferencias Mobile vs Desktop
+* navegación profesional
+* diseño visual Antigravity
+
+### Fase 4 — Hardware & Desktop
+
+* atajos teclado Windows
+* generación PDF
+* almacenamiento Hive Web
+* comportamiento offline
+
+Cada fase debe parecer planificación real de ingeniería.
+
+---
+
+## 5️⃣ ESTÁNDARES DE CALIDAD
 
 Definir:
 
-reglas de nombrado
-manejo de errores funcional (Either<Failure, Success>)
-principios Clean Architecture
-testing strategy
-separación de capas
-FORMATO DE RESPUESTA
+* reglas de nombrado
+* manejo funcional de errores (Either<Failure, Success>)
+* principios Clean Architecture
+* testing strategy
+* separación estricta de capas
+
+---
+
+# FORMATO FINAL
 
 La respuesta debe:
 
-verse como documentación empresarial real
-estar organizada por secciones claras
-lista para copiar y pegar
-sin explicaciones educativas
-sin ejemplos simples
-sin código de implementación todavía
+* parecer documentación empresarial real
+* organizada por secciones claras
+* lista para copiar y pegar
+* sin explicaciones educativas
+* sin ejemplos simples
+* sin código aún
 
-Debe sentirse como un Architecture Master Plan profesional.
+Debe sentirse como un **Architecture Master Plan profesional** entregado antes del desarrollo.
 
-INSTRUCCIÓN FINAL:
-
-Genera el documento completo del proyecto ANTIGRAVITY ahora.
+Genera el documento completo ahora.
