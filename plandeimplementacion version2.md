@@ -4,6 +4,9 @@ Plataforma Multiplataforma de Gestión de Parque de Atracciones
 Flutter 3.x — Clean Architecture — Multiplatform
 
 📁 1. ESTRUCTURA PROFESIONAL DEL PROYECTO
+## 📁 Project Structure — ANTIGRAVITY
+
+```bash
 antigravity/
 │
 ├── pubspec.yaml
@@ -13,33 +16,30 @@ antigravity/
 ├── assets/
 │   ├── images/
 │   ├── icons/
-│   └── fonts/
+│   ├── fonts/
+│   └── animations/
 │
 ├── lib/
 │   ├── main.dart
 │   │
 │   └── src/
-│
+│       │
 │       ├── core/
 │       │   ├── constants/
-│       │   │   ├── colors.dart
-│       │   │   ├── strings.dart
-│       │   │   └── sizes.dart
+│       │   │   └── app_constants.dart
 │       │   │
 │       │   ├── errors/
 │       │   │   ├── failures.dart
 │       │   │   └── exceptions.dart
 │       │   │
-│       │   ├── usecases/
-│       │   │   └── usecase.dart
+│       │   ├── theme/
+│       │   │   └── antigravity_theme.dart
 │       │   │
-│       │   ├── utils/
-│       │   │   ├── validators.dart
-│       │   │   └── platform_helper.dart
+│       │   ├── database/
+│       │   │   └── hive_service.dart
 │       │   │
-│       │   └── theme/
-│       │       ├── antigravity_theme.dart
-│       │       └── purple_palette.dart
+│       │   └── di/
+│       │       └── injector.dart
 │       │
 │       ├── domain/
 │       │   ├── entities/
@@ -49,16 +49,16 @@ antigravity/
 │       │   │   └── sale.dart
 │       │   │
 │       │   ├── repositories/
-│       │   │   ├── auth_repository.dart
+│       │   │   ├── employee_repository.dart
 │       │   │   ├── attraction_repository.dart
 │       │   │   ├── ticket_repository.dart
-│       │   │   └── sales_repository.dart
+│       │   │   └── sale_repository.dart
 │       │   │
 │       │   └── usecases/
 │       │       ├── login_employee.dart
 │       │       ├── buy_ticket.dart
 │       │       ├── validate_access.dart
-│       │       └── generate_ticket.dart
+│       │       └── register_sale.dart
 │       │
 │       ├── data/
 │       │   ├── models/
@@ -68,40 +68,49 @@ antigravity/
 │       │   │   └── sale_model.dart
 │       │   │
 │       │   ├── datasources/
-│       │   │   ├── local/
-│       │   │   │   ├── sqflite_db.dart
-│       │   │   │   └── hive_db.dart
+│       │   │   └── local_datasource.dart
 │       │   │
-│       │   ├── repositories/
-│       │   │   ├── auth_repository_impl.dart
-│       │   │   ├── attraction_repository_impl.dart
-│       │   │   ├── ticket_repository_impl.dart
-│       │   │   └── sales_repository_impl.dart
+│       │   ├── mappers/
+│       │   │   └── entity_mappers.dart
 │       │   │
-│       │   └── mappers/
-│       │       └── entity_mapper.dart
+│       │   └── repositories/
+│       │       ├── employee_repository_impl.dart
+│       │       ├── attraction_repository_impl.dart
+│       │       ├── ticket_repository_impl.dart
+│       │       └── sale_repository_impl.dart
 │       │
 │       └── presentation/
-│           ├── app/
-│           │   ├── router.dart
-│           │   └── app.dart
-│           │
-│           ├── shared/
-│           │   ├── widgets/
-│           │   └── layouts/
-│           │
 │           ├── pages/
 │           │   ├── login/
+│           │   │   └── login_page.dart
+│           │   │
 │           │   ├── dashboard/
+│           │   │   └── dashboard_page.dart
+│           │   │
 │           │   ├── attractions/
-│           │   ├── ticket_sales/
-│           │   └── settings/
+│           │   │   └── attractions_page.dart
+│           │   │
+│           │   └── sales/
+│           │       └── sales_page.dart
 │           │
-│           └── state/
-│               ├── providers/
-│               └── controllers/
+│           ├── widgets/
+│           │   ├── antigravity_button.dart
+│           │   ├── attraction_card.dart
+│           │   └── ticket_widget.dart
+│           │
+│           ├── providers/
+│           │   ├── auth_provider.dart
+│           │   ├── ticket_provider.dart
+│           │   └── attraction_provider.dart
+│           │
+│           └── navigation/
+│               └── app_router.dart
 │
 └── test/
+    ├── domain/
+    ├── data/
+    └── presentation/
+```
 📦 2. DEPENDENCIAS OFICIALES — pubspec.yaml
 
 ✔ SIN ANALÍTICAS
