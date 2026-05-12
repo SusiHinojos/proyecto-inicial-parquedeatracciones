@@ -1,67 +1,202 @@
-Role: Senior Fullstack Software Architect & Flutter Expert.
-Project Name: Antigravity Park Management System (Multiplatform).
+Actúa como un Senior Fullstack Software Architect especializado en Flutter 3.x, Clean Architecture, Domain Driven Design y desarrollo multiplataforma profesional.
 
-## INSTRUCCIÓN DE ALTA PRIORIDAD:
-Actúa como un Arquitecto de Software Senior con 15 años de experiencia. Necesito que diseñes la arquitectura completa del proyecto "Antigravity". No quiero un código genérico; quiero una estructura de grado empresarial que cumpla con los estándares de Clean Architecture y SOLID. Este proyecto es una solución multiplataforma que debe ejecutarse de forma nativa y fluida en Android, iOS, Windows y Web desde una única base de código.
+NO actúes como tutor.
+NO simplifiques.
+NO resumas.
+NO generes código fuente todavía.
+NO expliques conceptos básicos.
 
-# 1. CONTEXTO Y LÓGICA DE NEGOCIO "ANTIGRAVITY"
-El sistema debe gestionar la operatividad de un parque de atracciones con una lógica de acceso granular basada en el nivel de gravedad y el estatus del usuario.
+Tu rol es diseñar documentación técnica profesional lista para ingeniería real.
 
-A. Matriz de Acceso de Boletos:
+---
 
-Básico: Acceso estándar a atracciones de categoría "Básica". Sin prioridades.
+PROYECTO:
+Diseñar desde cero la plataforma multiplataforma llamada **ANTIGRAVITY**, un sistema profesional de gestión para un parque de atracciones.
 
-VIP: Acceso total a todas las atracciones (Básicas y VIP) con lógica de "Fast Track" integrada.
+Debe funcionar en:
 
-Familiar: Un boleto maestro que vincula múltiples perfiles (padres/hijos) con acceso compartido a atracciones básicas.
+* Android
+* iOS
+* Web
+* Windows Desktop
 
-Anual: Membresía de larga duración con persistencia de datos histórica y acceso total.
+---
 
-B. Especificaciones de Atracciones:
+OBJETIVO GENERAL:
 
-Cada atracción debe poseer metadatos técnicos: ID, Nombre, Categoría (VIP/Básica), Estado (Abierta/Mantenimiento/Cerrada), Capacidad Máxima, y el atributo exclusivo G-Force Intensity (Nivel de intensidad de gravedad).
+Crear el PLAN MAESTRO DE INGENIERÍA COMPLETO siguiendo estándares de software enterprise.
 
-# 2. REQUERIMIENTOS TÉCNICOS Y RESTRICCIONES (ESTRICTO)
-Para cumplir con los estándares académicos y profesionales solicitados:
+El sistema debe ser:
 
-Framework: Flutter 3.x estable con Dart 3.x (uso de Records, Patterns y Sealed Classes).
+* escalable
+* mantenible
+* offline-first
+* desacoplado
+* multiplataforma
+* profesional
 
-No Analytics: Queda estrictamente prohibida la importación de cualquier paquete de rastreo (Firebase Analytics, Mixpanel, etc.). La privacidad es prioridad absoluta.
+---
 
-No Production Overkill: No implementar despliegues complejos de CI/CD o microservicios externos; el sistema debe ser un "Monolito Limpio" fácil de ejecutar en modo debug/estándar.
+REGLAS DE NEGOCIO (OBLIGATORIAS):
 
-Arquitectura: Implementación obligatoria de Clean Architecture dividida en:
+1. Sistema de empleados local con roles.
+2. Sistema de venta de boletos con 4 tipos:
 
-Domain Layer: Entidades puras, Repositorios (interfaces) y Use Cases (Interactors).
+* Básico
+* VIP
+* Familiar
+* Anual
 
-Data Layer: Implementaciones de repositorios, DTOs (Data Transfer Objects), Mappers y Data Sources (Local/Remote).
+3. Jerarquía de Atracciones:
 
-Presentation Layer: State Management (Riverpod o BLoC), UI Widgets y Screens adaptativas.
+* Atracciones Básicas
+* Atracciones VIP
 
-# 3. TAREAS DE INGENIERÍA PREVIAS AL CÓDIGO
-Antes de escribir el main.dart, necesito que generes un plan de implementación "Giga-Extenso" que cubra:
+4. Reglas de acceso:
 
-Módulo I: Refinamiento de Datos y Persistencia:
+* Básico y Familiar → SOLO atracciones básicas
+* VIP y Anual → acceso total
 
-Diseño de un esquema de base de datos optimizado para sqflite (Desktop/Mobile) y Hive o IndexedDB (Web).
+5. Branding obligatorio:
 
-Explicación de cómo se manejarán las relaciones N:M entre Visitantes y Atracciones sin generar cuellos de botella.
+Cada atracción debe tener atributo:
+"G-Force" (fuerza G) como identidad Antigravity.
 
-Módulo II: UI Multiplataforma Adaptativa:
+6. Flujo de Venta:
 
-Estrategia de diseño para pantallas de Windows (Uso de Mouse/Keyboard, ventanas redimensionables) frente a Mobile (Touch, SafeArea, Gestos).
+Empleado inicia sesión →
+Compra boleto →
+Registro en base local →
+Generación automática de ticket.
 
-Uso de LayoutBuilder y BoxConstraints para una interfaz fluida.
+---
 
-Módulo III: Gestión de Estado y Flujo de Datos:
+RESTRICCIONES TÉCNICAS (MUY IMPORTANTES):
 
-Propuesta de un sistema de estados reactivo que maneje la compra de boletos y la validación de acceso en tiempo real sin recargar la UI.
+Arquitectura:
+✔ Clean Architecture estricta
 
-Módulo IV: Estándares de Calidad (Gobernanza):
+Capas obligatorias:
 
-Estructura jerárquica de carpetas completa (desde la raíz hasta los subdirectorios de assets).
+* Core
+* Domain
+* Data
+* Presentation
 
-Convenciones de nombrado (Clean Code) y manejo de errores mediante tipos funcionales (Either Left/Right).
+Persistencia:
 
-# 4. ENTREGABLE REQUERIDO
-Presenta este plan de forma detallada, técnica y profesional. Utiliza terminología de ingeniería de software. No generes el código todavía. Quiero que primero establezcas los cimientos teóricos y estructurales. Una vez que este plan sea aprobado, procederemos módulo por módulo.
+* sqflite para Mobile y Desktop
+* Hive para Web
+
+PROHIBIDO:
+
+* Firebase Analytics
+* SDKs de tracking
+* Backend online
+* Servicios cloud pesados
+
+Sistema completamente LOCAL.
+
+---
+
+ENTREGABLES QUE DEBES GENERAR:
+
+ENTREGA TODO EN UN SOLO DOCUMENTO EXTENSO.
+
+NO DIVIDIR RESPUESTAS.
+
+---
+
+1️⃣ ESTRUCTURA PROFESIONAL DE ARCHIVOS
+
+Genera el árbol completo del proyecto Flutter incluyendo:
+
+lib/src/core
+lib/src/domain
+lib/src/data
+lib/src/presentation
+
+Mostrar directorios y archivos .dart.
+
+---
+
+2️⃣ PLAN DE IMPLEMENTACIÓN COMPLETO
+
+Genera TODAS las fases completas:
+
+FASE 1 — Core & Data
+
+* entidades
+* DTOs
+* persistencia local
+* factory database
+* manejo de errores
+
+FASE 2 — Business Logic
+
+* repositories
+* use cases
+* reglas del parque
+* validación de accesos
+* value objects
+
+FASE 3 — UI Adaptativa
+
+* diseño mobile vs desktop
+* navegación
+* flujo de venta
+* state management
+* arquitectura presentation
+
+FASE 4 — Desktop & Hardware
+
+* atajos teclado Windows
+* generación PDF
+* offline-first
+* preparación hardware futuro
+
+Cada fase debe explicarse como PLAN DE IMPLEMENTACIÓN PROFESIONAL.
+
+NO incluir código.
+
+---
+
+3️⃣ DICCIONARIO DE DATOS
+
+Definir:
+
+* tablas
+* campos
+* tipos
+* relaciones (1:N, N:M)
+* claves primarias y foráneas
+
+---
+
+4️⃣ ESTÁNDARES DE CALIDAD
+
+Definir:
+
+* reglas de naming (camelCase, PascalCase)
+* manejo de errores funcional
+* convenciones arquitectónicas
+* responsabilidades por capa
+* principios SOLID aplicados
+
+---
+
+FORMATO DE RESPUESTA:
+
+* Documento técnico profesional
+* Extenso
+* Bien estructurado
+* Nivel arquitecto senior
+* Sin explicaciones educativas
+* Sin ejemplos simples
+* Sin código fuente
+
+---
+
+OBJETIVO FINAL:
+
+Generar la documentación base completa para iniciar el desarrollo profesional del sistema Antigravity.
