@@ -194,28 +194,32 @@ Modo académico:
 
 ## pubspec.yaml
 
-```yaml
+```name: myapp
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.1 <4.0.0'
+
 dependencies:
   flutter:
     sdk: flutter
-
-  # Functional Programming
-  equatable: ^2.0.5
-  dartz: ^0.10.1
-
-  # Dependency Injection
-  get_it: ^7.7.0
-
-  # Local Database (Multiplatform)
-  hive: ^2.2.3
-  hive_flutter: ^1.1.0
-
-  # Utilities
-  uuid: ^4.4.0
+  cupertino_icons: ^1.0.6
+  firebase_core: ^4.7.0
+  firebase_auth: ^6.4.0
+  cloud_firestore: ^6.3.0
+  google_fonts: ^6.2.1
+  provider: ^6.1.5+1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
 ```
 
 ---
