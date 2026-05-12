@@ -111,7 +111,7 @@ antigravity/
     ├── data/
     └── presentation/
 ```
-📦 2. DEPENDENCIAS OFICIALES — pubspec.yaml
+### 📦 2. DEPENDENCIAS OFICIALES — pubspec.yaml
 
 ✔ SIN ANALÍTICAS
 ✔ SIN CONFIGURACIÓN PRODUCCIÓN
@@ -160,7 +160,7 @@ dev_dependencies:
 🚫 NO Analytics
 🚫 NO Backend Cloud
 
-🎨 3. IDENTIDAD VISUAL — ANTIGRAVITY
+### 🎨 3. IDENTIDAD VISUAL — ANTIGRAVITY
 Concepto visual
 
 Sistema futurista inspirado en:
@@ -183,7 +183,7 @@ UI estilo:
 ✅ Glassmorphism
 ✅ Dark First Design
 
-🧠 4. DICCIONARIO DE DATOS (BASE LOCAL)
+### 🧠 4. DICCIONARIO DE DATOS (BASE LOCAL)
 EMPLOYEE
 Campo	Tipo
 id	TEXT UUID
@@ -218,7 +218,7 @@ Relaciones
 Employee 1 ---- N Sale
 Sale 1 ---- 1 Ticket
 Ticket N ---- N Attraction (por reglas)
-⚙️ 5. REGLAS DE NEGOCIO (CORE)
+### ⚙️ 5. REGLAS DE NEGOCIO (CORE)
 🎟 Tipos de boletos
 Tipo	Acceso
 Básico	Atracciones Básicas
@@ -240,7 +240,7 @@ G-Force Rating
 Ejemplo:
 
 HyperLoop → 4.7G
-🚀 6. GIGA PLAN DE IMPLEMENTACIÓN
+### 🚀 6. GIGA PLAN DE IMPLEMENTACIÓN
 ## ✅ FASE 1 — CORE & DATA
 Objetivo
 
@@ -345,7 +345,7 @@ Resultado final:
 ✔ Sistema profesional offline
 ✔ Desktop Ready
 
-🧩 7. ESTÁNDARES DE CALIDAD
+### 🧩 7. ESTÁNDARES DE CALIDAD
 Naming
 Elemento	Regla
 Clases	PascalCase
