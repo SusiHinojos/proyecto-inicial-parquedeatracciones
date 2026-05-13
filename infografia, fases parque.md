@@ -11,3 +11,7 @@
 <img width="1024" height="1536" alt="image" src="https://github.com/user-attachments/assets/93dd23e7-272e-4485-979f-d9745448509b" />
 
 # Fase 5
+<img width="1024" height="1536" alt="image" src="https://github.com/user-attachments/assets/10226d3b-e264-42c4-9277-e2567abe0c6a" />
+
+# Dependencias
+<img width="1024" height="1536" alt="image" src="https://github.com/user-attachments/assets/f8546bef-dbda-4c1d-8ab0-70920f50cd6b" />
