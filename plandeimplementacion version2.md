@@ -98,59 +98,33 @@ Estas tablas representan la lógica estructural del sistema ANTIGRAVITY.
 ---
 
 ## 👤 Usuarios
-
-* id_usuario
-* nombre
-* correo
-* rol
-* activo
-
----
-
+id_usuario
+nombre
+correo
+rol
+activo
 ## 👨‍💼 Empleados
-
-* id_empleado
-* nombre
-* puesto
-* salario
-* fecha_ingreso
-
----
-
-## 🧾 Clientes
-
-* id_cliente
-* nombre
-* telefono
-* correo
-
----
-
-## 📦 Productos
-
-* id_producto
-* nombre
-* precio
-* stock
-* categoria
-
----
-
-## 💳 Ventas
-
-* id_venta
-* fecha
-* total
-* id_cliente
-* id_empleado
-
----
-
-## 📊 Reportes
-
-* id_reporte
-* tipo
-* fecha_generacion
+id_empleado
+nombre
+puesto
+salario
+fecha_ingreso
+## 🎟️ Boletos
+id_boleto
+tipo_boleto        (Basico / VIP / Familiar / Anual)
+precio
+fecha_compra
+fecha_visita
+estado             (activo / usado / cancelado)
+id_cliente
+## 🎢 Atracciones
+id_atraccion
+nombre
+tipo               (Basica / VIP)
+altura_minima_cm
+estado             (activa / mantenimiento / inactiva)
+g_force
+capacidad
 
 ---
 
