@@ -194,34 +194,57 @@ Modo académico:
 
 ## pubspec.yaml
 
-```name: myapp
-description: "A new Flutter project."
+```name: autoelite_app
+description: AutoElite App
 publish_to: 'none'
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.4.1 <4.0.0'
+  sdk: ">=3.2.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
+
   cupertino_icons: ^1.0.6
-  firebase_core: ^4.7.0
-  firebase_auth: ^6.4.0
-  cloud_firestore: ^6.3.0
+
+  # Firebase
+  firebase_core: ^3.6.0
+  firebase_auth: ^5.3.1
+  cloud_firestore: ^5.4.4
+  firebase_storage: ^12.3.3
+
+  # State Management
+  provider: ^6.1.2
+
+  # UI
   google_fonts: ^6.2.1
-  provider: ^6.1.5+1
+  cached_network_image: ^3.4.1
+  flutter_staggered_grid_view: ^0.7.0
+  shimmer: ^3.0.0
+  animate_do: ^3.3.4
+
+  # Utils
+  image_picker: ^1.1.2
+  intl: ^0.19.0
+  uuid: ^4.5.1
+
+  # Icons
+  iconsax: ^0.0.8
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
+
+  flutter_lints: ^5.0.0
 
 flutter:
   uses-material-design: true
-```
 
+  assets:
+    - assets/images/
+```
 ---
 
 ## 🚫 Restricciones Académicas
