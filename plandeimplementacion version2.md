@@ -194,8 +194,7 @@ Modo académico:
 
 ## pubspec.yaml
 
-```name: autoelite_app
-description: AutoElite App
+```description: Antigravity App
 publish_to: 'none'
 
 version: 1.0.0+1
@@ -209,26 +208,28 @@ dependencies:
 
   cupertino_icons: ^1.0.6
 
-  # Firebase
-  firebase_core: ^3.6.0
-  firebase_auth: ^5.3.1
-  cloud_firestore: ^5.4.4
-  firebase_storage: ^12.3.3
+  # Functional
+  equatable: ^2.0.5
+  dartz: ^0.10.1
+
+  # Dependency Injection
+  get_it: ^7.7.0
+
+  # Local Database (Multiplatform)
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
 
   # State Management
   provider: ^6.1.2
 
   # UI
   google_fonts: ^6.2.1
-  cached_network_image: ^3.4.1
-  flutter_staggered_grid_view: ^0.7.0
   shimmer: ^3.0.0
   animate_do: ^3.3.4
 
-  # Utils
-  image_picker: ^1.1.2
-  intl: ^0.19.0
+  # Utilities
   uuid: ^4.5.1
+  intl: ^0.19.0
 
   # Icons
   iconsax: ^0.0.8
